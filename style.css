@@ -4,7 +4,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: 'Segoe UI', sans-serif;
+font-family:'Segoe UI', sans-serif;
 }
 
 /* BODY */
@@ -60,7 +60,6 @@ color:#38bdf8;
 /* HERO SECTION */
 
 .hero{
-
 height:90vh;
 display:flex;
 flex-direction:column;
@@ -73,13 +72,14 @@ background:linear-gradient(
 rgba(2,6,23,0.85),
 rgba(2,6,23,0.85)
 ),
-url("C:\Users\kansa\Downloads\hero-bg.jpg");
+url("hero-bg.jpg"); /* FIXED */
 
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
-
 }
+
+/* HERO TEXT FIX (VERY IMPORTANT) */
 
 .hero h1{
 font-size:50px;
@@ -93,6 +93,10 @@ color:#38bdf8;
 .hero h2{
 color:#38bdf8;
 margin-bottom:15px;
+font-size:28px;
+min-height:40px;   /* FIX: prevents cutting */
+white-space:nowrap; /* FIX: no text cut */
+overflow:hidden;
 }
 
 .hero p{
@@ -156,7 +160,7 @@ padding:80px 10%;
 text-align:center;
 }
 
-/* GLASSMORPHISM */
+/* GLASS */
 
 .glass{
 background:rgba(255,255,255,0.05);
@@ -165,7 +169,7 @@ border-radius:10px;
 padding:40px;
 }
 
-/* GRADIENT HEADINGS */
+/* GRADIENT */
 
 .gradient{
 background:linear-gradient(90deg,#38bdf8,#0ea5e9);
@@ -195,8 +199,6 @@ background:#38bdf8;
 border-radius:10px;
 }
 
-/* SKILL WIDTHS */
-
 .html{width:90%}
 .css{width:85%}
 .js{width:70%}
@@ -221,11 +223,6 @@ transition:0.3s;
 .card:hover{
 transform:translateY(-8px);
 box-shadow:0 10px 20px rgba(0,0,0,0.5);
-}
-
-.card h3{
-margin-bottom:10px;
-color:#38bdf8;
 }
 
 /* CONTACT */
@@ -265,7 +262,7 @@ button:hover{
 background:#0ea5e9;
 }
 
-/* SOCIAL ICONS */
+/* SOCIAL */
 
 .social{
 margin-top:25px;
@@ -275,11 +272,6 @@ margin-top:25px;
 font-size:28px;
 margin:10px;
 color:#38bdf8;
-transition:0.3s;
-}
-
-.social i:hover{
-transform:scale(1.2);
 }
 
 /* FOOTER */
@@ -292,7 +284,7 @@ border-top:1px solid #1e293b;
 color:#94a3b8;
 }
 
-/* SCROLL PROGRESS BAR */
+/* SCROLL BAR */
 
 #progress-bar{
 position:fixed;
@@ -304,7 +296,7 @@ width:0;
 z-index:999;
 }
 
-/* CUSTOM CURSOR */
+/* CURSOR */
 
 .cursor{
 position:fixed;
@@ -316,7 +308,7 @@ pointer-events:none;
 z-index:999;
 }
 
-/* SCROLL REVEAL */
+/* REVEAL */
 
 .reveal{
 opacity:0;
@@ -335,6 +327,11 @@ transform:translateY(0);
 
 .hero h1{
 font-size:36px;
+}
+
+.hero h2{
+font-size:22px;
+white-space:normal; /* allow wrap on mobile */
 }
 
 nav{
