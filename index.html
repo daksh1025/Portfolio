@@ -10,8 +10,13 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Devicon (IMPORTANT) -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
 </head>
 
@@ -23,19 +28,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div class="cursor"></div>
 
 <header>
-
 <h2 class="logo">DK</h2>
 
 <nav>
-
 <a href="#home">Home</a>
 <a href="#about">About</a>
 <a href="#skills">Skills</a>
 <a href="#projects">Projects</a>
 <a href="#contact">Contact</a>
-
 </nav>
-
 </header>
 
 <!-- HERO -->
@@ -44,26 +45,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <h1>Hello I'm <span>Dax Kansara</span></h1>
 
-<h2><span id="typing"></span></h2>
+<h2><span id="typing"></span><span class="blink">|</span></h2>
 
 <p>
-2nd Year B.Tech IT Student at Parul University | Aspiring Web Developer
+2nd Year B.Tech IT Student | Aspiring Web Developer
 </p>
 
 <div class="buttons">
-
 <a href="#projects" class="btn">View Projects</a>
-<a href="resume.pdf" download class="btn-outline">Download Resume</a>
-
+<a href="resume.pdf" class="btn-outline" download>Download Resume</a>
 </div>
+
+<!-- TECH ICONS (FINAL PERFECT SET) -->
 
 <div class="tech-icons">
 
-<i class="fab fa-html5"></i>
-<i class="fab fa-css3-alt"></i>
-<i class="fab fa-js"></i>
-<i class="fab fa-python"></i>
-<i class="fas fa-database"></i>
+<i class="devicon-html5-plain colored" title="HTML5"></i>
+<i class="devicon-css3-plain colored" title="CSS3"></i>
+<i class="devicon-javascript-plain colored" title="JavaScript"></i>
+<i class="devicon-python-plain colored" title="Python"></i>
+<i class="devicon-mysql-plain colored" title="MySQL"></i>
+
+<i class="devicon-c-plain colored" title="C"></i>
+<i class="devicon-cplusplus-plain colored" title="C++"></i>
+<i class="devicon-mongodb-plain colored" title="MongoDB"></i>
 
 </div>
 
@@ -72,13 +77,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- ABOUT -->
 
 <section id="about" class="section reveal glass">
-
 <h2 class="gradient">About Me</h2>
 
 <p>
-    I am a 2nd-year B.Tech student in Information Technology at Parul University.
-    I have a strong interest in web development and programming, and I enjoy
-    building responsive websites while continuously improving my technical skills.
+I am a 2nd-year B.Tech IT student passionate about web development.
+I enjoy building modern, responsive websites and learning new technologies.
 </p>
 
 </section>
@@ -103,6 +106,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <p>Python</p>
 <div class="bar"><div class="progress python"></div></div>
 
+<p>C</p>
+<div class="bar"><div class="progress c"></div></div>
+
+<p>C++</p>
+<div class="bar"><div class="progress cpp"></div></div>
+
+<p>MongoDB</p>
+<div class="bar"><div class="progress mongo"></div></div>
+
 </div>
 
 </section>
@@ -116,23 +128,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div class="projects">
 
 <div class="card">
-
 <h3>Portfolio Website</h3>
-
-<p>Personal developer portfolio built with HTML, CSS and JavaScript.</p>
-
-<a href="https://github.com/daksh1025" class="btn">View More</a>
-
+<p>Modern responsive portfolio</p>
+<a href="#" class="btn">Live Demo</a>
 </div>
 
 <div class="card">
-
 <h3>Student Management System</h3>
-
-<p>Python + MySQL project for managing student records.</p>
-
-<a href="https://github.com/daksh1025" class="btn">View More</a>
-
+<p>Python + MySQL project</p>
+<a href="#" class="btn">Live Demo</a>
 </div>
 
 </div>
@@ -146,31 +150,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <h2 class="gradient">Contact Me</h2>
 
 <form action="https://formspree.io/f/yourcode" method="POST">
-
 <input type="text" placeholder="Your Name" required>
-
 <input type="email" placeholder="Email" required>
-
 <textarea placeholder="Message"></textarea>
-
 <button type="submit">Send Message</button>
-
 </form>
 
 <div class="social">
-
 <a href="https://github.com/daksh1025"><i class="fab fa-github"></i></a>
 <a href="#"><i class="fab fa-linkedin"></i></a>
 <a href="#"><i class="fab fa-twitter"></i></a>
-
 </div>
 
 </section>
 
 <footer>
-
 <p>© 2026 Dax Kansara</p>
-
 </footer>
 
 <script src="script.js"></script>

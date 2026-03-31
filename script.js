@@ -4,7 +4,7 @@ const words = [
     "Web Developer",
     "Frontend Learner",
     "Backend Learner",
-    "Tech Enthusiast"
+    "Building & exploring tech"
     
 ];
 
