@@ -4,6 +4,7 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Segoe UI', sans-serif;
+scroll-behavior:smooth;
 }
 
 /* BODY */
@@ -34,6 +35,7 @@ position:sticky;
 top:0;
 background:rgba(2,6,23,0.8);
 backdrop-filter:blur(10px);
+z-index:100;
 }
 
 .logo{
@@ -42,15 +44,28 @@ font-weight:bold;
 color:#38bdf8;
 }
 
+/* NAV HOVER EFFECT */
 nav a{
 color:white;
 text-decoration:none;
 margin-left:20px;
+position:relative;
 transition:0.3s;
 }
 
-nav a:hover{
-color:#38bdf8;
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-5px;
+width:0;
+height:2px;
+background:#38bdf8;
+transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
 }
 
 /* HERO */
@@ -89,6 +104,14 @@ white-space:nowrap;
 overflow:hidden;
 }
 
+/* BLINK CURSOR */
+.blink{
+animation:blink 1s infinite;
+}
+@keyframes blink{
+50%{opacity:0;}
+}
+
 .hero p{
 max-width:600px;
 color:#cbd5f5;
@@ -109,6 +132,7 @@ transition:0.3s;
 
 .btn:hover{
 background:#0ea5e9;
+box-shadow:0 0 15px #38bdf8;
 }
 
 .btn-outline{
@@ -118,14 +142,16 @@ border-radius:6px;
 text-decoration:none;
 color:white;
 margin:5px;
+transition:0.3s;
 }
 
 .btn-outline:hover{
 background:#38bdf8;
 color:black;
+box-shadow:0 0 15px #38bdf8;
 }
 
-/* TECH ICONS (FIXED ALIGNMENT) */
+/* TECH ICONS */
 .tech-icons{
 display:flex;
 justify-content:center;
@@ -157,6 +183,11 @@ background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
 border-radius:10px;
 padding:40px;
+transition:0.3s;
+}
+
+.glass:hover{
+box-shadow:0 0 20px rgba(56,189,248,0.3);
 }
 
 /* GRADIENT */
@@ -187,6 +218,7 @@ background:#38bdf8;
 border-radius:10px;
 }
 
+/* SKILL WIDTHS */
 .html{width:90%}
 .css{width:85%}
 .js{width:70%}
@@ -251,10 +283,12 @@ border-radius:6px;
 cursor:pointer;
 color:black;
 font-weight:bold;
+transition:0.3s;
 }
 
 button:hover{
 background:#0ea5e9;
+box-shadow:0 0 15px #38bdf8;
 }
 
 /* LOADER */

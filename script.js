@@ -41,10 +41,6 @@ function typeEffect() {
 typeEffect();
 
 
-/* =========================
-   SCROLL REVEAL
-========================= */
-
 const reveals = document.querySelectorAll(".reveal");
 
 function revealOnScroll() {
@@ -61,10 +57,6 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 
 
-/* =========================
-   CUSTOM CURSOR (SMOOTH)
-========================= */
-
 const cursor = document.querySelector(".cursor");
 
 document.addEventListener("mousemove", e => {
@@ -73,9 +65,6 @@ document.addEventListener("mousemove", e => {
 });
 
 
-/* =========================
-   SCROLL PROGRESS BAR
-========================= */
 
 window.addEventListener("scroll", () => {
 
@@ -88,9 +77,6 @@ window.addEventListener("scroll", () => {
 });
 
 
-/* =========================
-   MATRIX BACKGROUND (RESPONSIVE)
-========================= */
 
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
@@ -105,6 +91,7 @@ window.addEventListener("resize", resizeCanvas);
 
 const letters = "01";
 const fontSize = 14;
+
 let columns = canvas.width / fontSize;
 let drops = Array(Math.floor(columns)).fill(1);
 
@@ -122,8 +109,9 @@ function draw() {
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
+        }
 
         drops[i]++;
     }
@@ -131,33 +119,42 @@ function draw() {
 
 setInterval(draw, 33);
 
-
-/* =========================
-   CONTACT FORM UX (IMPORTANT)
-========================= */
-
 const form = document.getElementById("contact-form");
 const loader = document.getElementById("loader");
 const btnText = document.getElementById("btn-text");
 const popup = document.getElementById("popup");
 
-if(form){
-form.addEventListener("submit", () => {
+if (form) {
 
-    btnText.textContent = "Sending...";
-    loader.classList.remove("hidden");
+    form.addEventListener("submit", () => {
 
-    setTimeout(() => {
-
-        loader.classList.add("hidden");
-        btnText.textContent = "Send Message";
-
-        popup.classList.add("show");
+        btnText.textContent = "Sending...";
+        loader.classList.remove("hidden");
 
         setTimeout(() => {
-            popup.classList.remove("show");
-        }, 3000);
 
-    }, 2000);
-});
+            loader.classList.add("hidden");
+            btnText.textContent = "Send Message";
+
+            popup.classList.add("show");
+
+            setTimeout(() => {
+                popup.classList.remove("show");
+            }, 3000);
+
+        }, 2000);
+    });
+
 }
+
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+    card.addEventListener("mouseenter", () => {
+        card.style.transform = "translateY(-10px) scale(1.02)";
+    });
+
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "translateY(0) scale(1)";
+    });
+});
