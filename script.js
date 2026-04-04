@@ -1,4 +1,6 @@
-/* TYPING EFFECT */
+/* =========================
+   TYPING EFFECT
+========================= */
 
 const words = [
 "Web Developer",
@@ -7,125 +9,185 @@ const words = [
 "Tech Enthusiast"
 ];
 
-let i=0,j=0,deleting=false;
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
 
-function type(){
-let current=words[i];
+function typeEffect() {
 
-if(!deleting){j++;}
-else{j--;}
+    let currentWord = words[wordIndex];
 
-document.getElementById("typing").textContent=current.substring(0,j);
+    if (isDeleting) {
+        charIndex--;
+    } else {
+        charIndex++;
+    }
 
-if(!deleting && j==current.length){
-deleting=true;
-setTimeout(type,1000);
-return;
+    document.getElementById("typing").textContent =
+        currentWord.substring(0, charIndex);
+
+    let speed = isDeleting ? 70 : 120;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+        speed = 1200;
+        isDeleting = true;
+    }
+
+    else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        speed = 300;
+    }
+
+    setTimeout(typeEffect, speed);
 }
-else if(deleting && j==0){
-deleting=false;
-i=(i+1)%words.length;
-}
 
-setTimeout(type,100);
-}
-type();
+typeEffect();
 
-/* SCROLL REVEAL */
 
-const reveals=document.querySelectorAll(".reveal");
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-window.addEventListener("scroll",()=>{
-reveals.forEach(section=>{
-const top=section.getBoundingClientRect().top;
-const screen=window.innerHeight;
-if(top<screen-100){
-section.classList.add("active");
-}
-});
-});
+const reveals = document.querySelectorAll(".reveal");
 
-/* CURSOR */
+window.addEventListener("scroll", () => {
+    reveals.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        const screen = window.innerHeight;
 
-const cursor=document.querySelector(".cursor");
-
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
-});
-
-/* SCROLL BAR */
-
-window.addEventListener("scroll",()=>{
-let scrollTop=document.documentElement.scrollTop;
-let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-let progress=(scrollTop/height)*100;
-document.getElementById("progress-bar").style.width=progress+"%";
+        if (top < screen - 100) {
+            section.classList.add("active");
+        }
+    });
 });
 
-/* FORM */
 
-const form=document.getElementById("contact-form");
-const loader=document.getElementById("loader");
-const btnText=document.getElementById("btn-text");
-const popup=document.getElementById("popup");
+/* =========================
+   CUSTOM CURSOR
+========================= */
 
-form.addEventListener("submit",async(e)=>{
+const cursor = document.querySelector(".cursor");
 
-e.preventDefault();
-
-loader.classList.remove("hidden");
-btnText.textContent="Sending...";
-
-let data=new FormData(form);
-
-await fetch("https://formspree.io/f/YOURCODE",{
-method:"POST",
-body:data,
-headers:{'Accept':'application/json'}
+document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
 });
 
-loader.classList.add("hidden");
-btnText.textContent="Send Message";
 
-popup.classList.add("show");
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
 
-setTimeout(()=>popup.classList.remove("show"),3000);
+window.addEventListener("scroll", () => {
 
-form.reset();
+    let scrollTop = document.documentElement.scrollTop;
 
+    let height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    let progress = (scrollTop / height) * 100;
+
+    document.getElementById("progress-bar").style.width = progress + "%";
 });
 
-/* MATRIX */
 
-const canvas=document.getElementById("matrix");
-const ctx=canvas.getContext("2d");
+/* =========================
+   CONTACT FORM (NO REDIRECT)
+========================= */
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+const form = document.getElementById("contact-form");
+const loader = document.getElementById("loader");
+const btnText = document.getElementById("btn-text");
+const popup = document.getElementById("popup");
 
-const letters="01";
-const fontSize=14;
-const columns=canvas.width/fontSize;
-const drops=[];
+form.addEventListener("submit", async (e) => {
 
-for(let x=0;x<columns;x++) drops[x]=1;
+    e.preventDefault(); // 🚫 stop redirect
 
-function draw(){
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+    loader.classList.remove("hidden");
+    btnText.textContent = "Sending...";
 
-ctx.fillStyle="#38bdf8";
-ctx.font=fontSize+"px monospace";
+    const formData = new FormData(form);
 
-for(let i=0;i<drops.length;i++){
-let text=letters[Math.floor(Math.random()*letters.length)];
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+    try {
 
-if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
-drops[i]=0;
+        await fetch("https://formspree.io/f/YOURCODE", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        // SUCCESS UI
+        btnText.textContent = "Message Sent ✅";
+        loader.classList.add("hidden");
+
+        popup.classList.add("show");
+
+        setTimeout(() => {
+            popup.classList.remove("show");
+            btnText.textContent = "Send Message";
+        }, 2500);
+
+        form.reset();
+
+    } catch (error) {
+
+        loader.classList.add("hidden");
+        btnText.textContent = "Error ❌";
+
+    }
+});
+
+
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "01";
+const fontSize = 14;
+
+const columns = canvas.width / fontSize;
+const drops = [];
+
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
 }
-drops[i]++;
+
+function draw() {
+
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#38bdf8";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+
+        const text =
+            letters.charAt(Math.floor(Math.random() * letters.length));
+
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (
+            drops[i] * fontSize > canvas.height &&
+            Math.random() > 0.975
+        ) {
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
 }
-}
-setInterval(draw,33);
+
+setInterval(draw, 33);
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
