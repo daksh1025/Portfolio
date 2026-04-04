@@ -122,7 +122,7 @@ form.addEventListener("submit", async (e) => {
         });
 
         // SUCCESS UI
-        btnText.textContent = "Message Sent ✅";
+        btnText.textContent = "Message Sent ";
         loader.classList.add("hidden");
 
         popup.classList.add("show");
