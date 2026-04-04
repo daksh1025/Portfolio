@@ -98,7 +98,6 @@ window.addEventListener("scroll", () => {
 ========================= */
 
 const form = document.getElementById("contact-form");
-const loader = document.getElementById("loader");
 const btnText = document.getElementById("btn-text");
 const popup = document.getElementById("popup");
 
