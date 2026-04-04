@@ -1,160 +1,131 @@
+/* TYPING EFFECT */
+
 const words = [
-    "Web Developer",
-    "Frontend Learner",
-    "Backend Learner",
-    "Building & Exploring Tech"
+"Web Developer",
+"Frontend Learner",
+"Backend Learner",
+"Tech Enthusiast"
 ];
 
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+let i=0,j=0,deleting=false;
 
-function typeEffect() {
+function type(){
+let current=words[i];
 
-    const currentWord = words[wordIndex];
+if(!deleting){j++;}
+else{j--;}
 
-    if (isDeleting) {
-        charIndex--;
-    } else {
-        charIndex++;
-    }
+document.getElementById("typing").textContent=current.substring(0,j);
 
-    document.getElementById("typing").textContent =
-        currentWord.substring(0, charIndex);
-
-    let speed = isDeleting ? 70 : 120;
-
-    if (!isDeleting && charIndex === currentWord.length) {
-        speed = 1200;
-        isDeleting = true;
-    }
-
-    else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        speed = 300;
-    }
-
-    setTimeout(typeEffect, speed);
+if(!deleting && j==current.length){
+deleting=true;
+setTimeout(type,1000);
+return;
+}
+else if(deleting && j==0){
+deleting=false;
+i=(i+1)%words.length;
 }
 
-typeEffect();
-
-
-const reveals = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-    reveals.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-        const screen = window.innerHeight;
-
-        if (top < screen - 100) {
-            section.classList.add("active");
-        }
-    });
+setTimeout(type,100);
 }
+type();
 
-window.addEventListener("scroll", revealOnScroll);
+/* SCROLL REVEAL */
 
+const reveals=document.querySelectorAll(".reveal");
 
-const cursor = document.querySelector(".cursor");
-
-document.addEventListener("mousemove", e => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+window.addEventListener("scroll",()=>{
+reveals.forEach(section=>{
+const top=section.getBoundingClientRect().top;
+const screen=window.innerHeight;
+if(top<screen-100){
+section.classList.add("active");
+}
+});
 });
 
+/* CURSOR */
 
+const cursor=document.querySelector(".cursor");
 
-window.addEventListener("scroll", () => {
-
-    let scrollTop = document.documentElement.scrollTop;
-    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-    let progress = (scrollTop / height) * 100;
-
-    document.getElementById("progress-bar").style.width = progress + "%";
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
 });
 
+/* SCROLL BAR */
 
-
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-const letters = "01";
-const fontSize = 14;
-
-let columns = canvas.width / fontSize;
-let drops = Array(Math.floor(columns)).fill(1);
-
-function draw() {
-
-    ctx.fillStyle = "rgba(0,0,0,0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#38bdf8";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < drops.length; i++) {
-
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-        }
-
-        drops[i]++;
-    }
-}
-
-setInterval(draw, 33);
-
-const form = document.getElementById("contact-form");
-const loader = document.getElementById("loader");
-const btnText = document.getElementById("btn-text");
-const popup = document.getElementById("popup");
-
-if (form) {
-
-    form.addEventListener("submit", () => {
-
-        btnText.textContent = "Sending...";
-        loader.classList.remove("hidden");
-
-        setTimeout(() => {
-
-            loader.classList.add("hidden");
-            btnText.textContent = "Send Message";
-
-            popup.classList.add("show");
-
-            setTimeout(() => {
-                popup.classList.remove("show");
-            }, 3000);
-
-        }, 2000);
-    });
-
-}
-
-const cards = document.querySelectorAll(".card");
-
-cards.forEach(card => {
-    card.addEventListener("mouseenter", () => {
-        card.style.transform = "translateY(-10px) scale(1.02)";
-    });
-
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "translateY(0) scale(1)";
-    });
+window.addEventListener("scroll",()=>{
+let scrollTop=document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let progress=(scrollTop/height)*100;
+document.getElementById("progress-bar").style.width=progress+"%";
 });
+
+/* FORM */
+
+const form=document.getElementById("contact-form");
+const loader=document.getElementById("loader");
+const btnText=document.getElementById("btn-text");
+const popup=document.getElementById("popup");
+
+form.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+loader.classList.remove("hidden");
+btnText.textContent="Sending...";
+
+let data=new FormData(form);
+
+await fetch("https://formspree.io/f/YOURCODE",{
+method:"POST",
+body:data,
+headers:{'Accept':'application/json'}
+});
+
+loader.classList.add("hidden");
+btnText.textContent="Send Message";
+
+popup.classList.add("show");
+
+setTimeout(()=>popup.classList.remove("show"),3000);
+
+form.reset();
+
+});
+
+/* MATRIX */
+
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const letters="01";
+const fontSize=14;
+const columns=canvas.width/fontSize;
+const drops=[];
+
+for(let x=0;x<columns;x++) drops[x]=1;
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#38bdf8";
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
+drops[i]=0;
+}
+drops[i]++;
+}
+}
+setInterval(draw,33);
