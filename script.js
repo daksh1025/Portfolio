@@ -104,8 +104,6 @@ const popup = document.getElementById("popup");
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault(); // 🚫 stop redirect
-
-    loader.classList.remove("hidden");
     btnText.textContent = "Sending...";
 
     const formData = new FormData(form);
@@ -122,8 +120,7 @@ form.addEventListener("submit", async (e) => {
 
         // SUCCESS UI
         btnText.textContent = "Message Sent ";
-        loader.classList.add("hidden");
-
+        
         popup.classList.add("show");
 
         setTimeout(() => {
