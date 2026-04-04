@@ -1,11 +1,8 @@
-/* Typing Effect (FIXED) */
-
 const words = [
     "Web Developer",
     "Frontend Learner",
     "Backend Learner",
-    "Building & exploring tech"
-    
+    "Building & Exploring Tech"
 ];
 
 let wordIndex = 0;
@@ -14,7 +11,7 @@ let isDeleting = false;
 
 function typeEffect() {
 
-    let currentWord = words[wordIndex];
+    const currentWord = words[wordIndex];
 
     if (isDeleting) {
         charIndex--;
@@ -25,15 +22,13 @@ function typeEffect() {
     document.getElementById("typing").textContent =
         currentWord.substring(0, charIndex);
 
-    let speed = isDeleting ? 80 : 120;
+    let speed = isDeleting ? 70 : 120;
 
-    /* When word fully typed */
     if (!isDeleting && charIndex === currentWord.length) {
         speed = 1200;
         isDeleting = true;
     }
 
-    /* When word fully deleted */
     else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         wordIndex = (wordIndex + 1) % words.length;
@@ -46,11 +41,13 @@ function typeEffect() {
 typeEffect();
 
 
-/* Scroll Reveal */
+/* =========================
+   SCROLL REVEAL
+========================= */
 
 const reveals = document.querySelectorAll(".reveal");
 
-window.addEventListener("scroll", () => {
+function revealOnScroll() {
     reveals.forEach(section => {
         const top = section.getBoundingClientRect().top;
         const screen = window.innerHeight;
@@ -59,10 +56,14 @@ window.addEventListener("scroll", () => {
             section.classList.add("active");
         }
     });
-});
+}
+
+window.addEventListener("scroll", revealOnScroll);
 
 
-/* Cursor */
+/* =========================
+   CUSTOM CURSOR (SMOOTH)
+========================= */
 
 const cursor = document.querySelector(".cursor");
 
@@ -72,35 +73,40 @@ document.addEventListener("mousemove", e => {
 });
 
 
-/* Scroll Progress */
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
 
-window.onscroll = function () {
+window.addEventListener("scroll", () => {
 
     let scrollTop = document.documentElement.scrollTop;
-
     let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
     let progress = (scrollTop / height) * 100;
 
     document.getElementById("progress-bar").style.width = progress + "%";
-};
+});
 
 
-/* MATRIX BACKGROUND */
+/* =========================
+   MATRIX BACKGROUND (RESPONSIVE)
+========================= */
 
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
 
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
 const letters = "01";
 const fontSize = 14;
-
-const columns = canvas.width / fontSize;
-const drops = [];
-
-for (let x = 0; x < columns; x++) drops[x] = 1;
+let columns = canvas.width / fontSize;
+let drops = Array(Math.floor(columns)).fill(1);
 
 function draw() {
 
@@ -124,3 +130,34 @@ function draw() {
 }
 
 setInterval(draw, 33);
+
+
+/* =========================
+   CONTACT FORM UX (IMPORTANT)
+========================= */
+
+const form = document.getElementById("contact-form");
+const loader = document.getElementById("loader");
+const btnText = document.getElementById("btn-text");
+const popup = document.getElementById("popup");
+
+if(form){
+form.addEventListener("submit", () => {
+
+    btnText.textContent = "Sending...";
+    loader.classList.remove("hidden");
+
+    setTimeout(() => {
+
+        loader.classList.add("hidden");
+        btnText.textContent = "Send Message";
+
+        popup.classList.add("show");
+
+        setTimeout(() => {
+            popup.classList.remove("show");
+        }, 3000);
+
+    }, 2000);
+});
+}

@@ -1,5 +1,4 @@
 /* RESET */
-
 *{
 margin:0;
 padding:0;
@@ -8,7 +7,6 @@ font-family:'Segoe UI', sans-serif;
 }
 
 /* BODY */
-
 body{
 background:#020617;
 color:white;
@@ -16,8 +14,7 @@ overflow-x:hidden;
 line-height:1.6;
 }
 
-/* MATRIX BACKGROUND */
-
+/* MATRIX */
 #matrix{
 position:fixed;
 top:0;
@@ -28,7 +25,6 @@ z-index:-1;
 }
 
 /* NAVBAR */
-
 header{
 display:flex;
 justify-content:space-between;
@@ -57,8 +53,7 @@ nav a:hover{
 color:#38bdf8;
 }
 
-/* HERO SECTION */
-
+/* HERO */
 .hero{
 height:90vh;
 display:flex;
@@ -68,18 +63,13 @@ justify-content:center;
 text-align:center;
 padding:20px;
 
-background:linear-gradient(
-rgba(2,6,23,0.85),
-rgba(2,6,23,0.85)
-),
-url("hero-bg.jpg"); /* FIXED */
+background:linear-gradient(rgba(2,6,23,0.85),rgba(2,6,23,0.85)),
+url("hero-bg.jpg");
 
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
 }
-
-/* HERO TEXT FIX (VERY IMPORTANT) */
 
 .hero h1{
 font-size:50px;
@@ -94,8 +84,8 @@ color:#38bdf8;
 color:#38bdf8;
 margin-bottom:15px;
 font-size:28px;
-min-height:40px;   /* FIX: prevents cutting */
-white-space:nowrap; /* FIX: no text cut */
+min-height:40px;
+white-space:nowrap;
 overflow:hidden;
 }
 
@@ -106,7 +96,6 @@ margin-bottom:20px;
 }
 
 /* BUTTONS */
-
 .btn{
 background:#38bdf8;
 color:black;
@@ -136,32 +125,33 @@ background:#38bdf8;
 color:black;
 }
 
-/* TECH ICONS */
-
+/* TECH ICONS (FIXED ALIGNMENT) */
 .tech-icons{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:30px;
 margin-top:25px;
-font-size:30px;
 }
 
 .tech-icons i{
-margin:10px;
-color:#38bdf8;
+font-size:45px;
 transition:0.3s;
+cursor:pointer;
 }
 
 .tech-icons i:hover{
-transform:translateY(-5px);
+transform:translateY(-8px) scale(1.1);
 }
 
 /* SECTION */
-
 .section{
 padding:80px 10%;
 text-align:center;
 }
 
 /* GLASS */
-
 .glass{
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
@@ -170,7 +160,6 @@ padding:40px;
 }
 
 /* GRADIENT */
-
 .gradient{
 background:linear-gradient(90deg,#38bdf8,#0ea5e9);
 -webkit-background-clip:text;
@@ -179,7 +168,6 @@ margin-bottom:20px;
 }
 
 /* SKILLS */
-
 .skill{
 max-width:500px;
 margin:auto;
@@ -203,9 +191,11 @@ border-radius:10px;
 .css{width:85%}
 .js{width:70%}
 .python{width:75%}
+.c{width:65%}
+.cpp{width:60%}
+.mongo{width:60%}
 
 /* PROJECTS */
-
 .projects{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -226,7 +216,6 @@ box-shadow:0 10px 20px rgba(0,0,0,0.5);
 }
 
 /* CONTACT */
-
 form{
 max-width:400px;
 margin:auto;
@@ -242,6 +231,12 @@ border:none;
 border-radius:6px;
 background:#1e293b;
 color:white;
+}
+
+input:focus,textarea:focus{
+outline:none;
+border:1px solid #38bdf8;
+box-shadow:0 0 8px #38bdf8;
 }
 
 textarea{
@@ -262,8 +257,66 @@ button:hover{
 background:#0ea5e9;
 }
 
-/* SOCIAL */
+/* LOADER */
+#loader{
+width:18px;
+height:18px;
+border:3px solid white;
+border-top:3px solid transparent;
+border-radius:50%;
+display:inline-block;
+animation:spin 1s linear infinite;
+margin-left:10px;
+}
 
+.hidden{
+display:none;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+top:20px;
+right:20px;
+background:#22c55e;
+padding:15px 20px;
+border-radius:6px;
+color:white;
+opacity:0;
+transform:translateY(-20px);
+transition:0.4s;
+z-index:999;
+}
+
+.popup.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+font-size:28px;
+padding:12px;
+border-radius:50%;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+transition:0.3s;
+z-index:999;
+}
+
+.whatsapp:hover{
+transform:scale(1.1);
+}
+
+/* SOCIAL */
 .social{
 margin-top:25px;
 }
@@ -272,10 +325,14 @@ margin-top:25px;
 font-size:28px;
 margin:10px;
 color:#38bdf8;
+transition:0.3s;
+}
+
+.social i:hover{
+transform:scale(1.2);
 }
 
 /* FOOTER */
-
 footer{
 text-align:center;
 padding:20px;
@@ -285,7 +342,6 @@ color:#94a3b8;
 }
 
 /* SCROLL BAR */
-
 #progress-bar{
 position:fixed;
 top:0;
@@ -297,7 +353,6 @@ z-index:999;
 }
 
 /* CURSOR */
-
 .cursor{
 position:fixed;
 width:20px;
@@ -309,7 +364,6 @@ z-index:999;
 }
 
 /* REVEAL */
-
 .reveal{
 opacity:0;
 transform:translateY(40px);
@@ -322,7 +376,6 @@ transform:translateY(0);
 }
 
 /* RESPONSIVE */
-
 @media(max-width:768px){
 
 .hero h1{
@@ -331,7 +384,7 @@ font-size:36px;
 
 .hero h2{
 font-size:22px;
-white-space:normal; /* allow wrap on mobile */
+white-space:normal;
 }
 
 nav{
